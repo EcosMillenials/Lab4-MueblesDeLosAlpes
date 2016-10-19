@@ -12,13 +12,21 @@
 
 package com.losalpes.entities;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Clase que modela un registro de venta realizado por un cliente
  * 
  */
-public class RegistroVenta
+@Entity
+public class RegistroVenta implements Serializable
 {
 
     //-----------------------------------------------------------
@@ -28,12 +36,27 @@ public class RegistroVenta
     /**
      * Fecha en la que se vendió el producto
      */
+    @Temporal(TemporalType.DATE)
+    @Id
     private Date fechaVenta;
 
     /**
      * Producto vendido
      */
+    @ManyToOne
+    @JoinColumn(name="referencia")
+    @Id
     private Mueble producto;
+    
+    /**
+     * Usuario que compró el producto
+     */
+    @ManyToOne
+    @JoinColumn(name="comprador")
+    @Id
+    private Usuario comprador;
+
+    
 
     /**
      * Cantidad vendida del producto
@@ -45,10 +68,7 @@ public class RegistroVenta
      */
     private String ciudad;
 
-    /**
-     * Usuario que compró el producto
-     */
-    private Usuario comprador;
+    
 
     //-----------------------------------------------------------
     // Constructor
@@ -75,7 +95,7 @@ public class RegistroVenta
         this.fechaVenta = fechaVenta;
         this.producto = producto;
         this.cantidad = cantidad;
-        this.ciudad = ciudad;
+        this.ciudad = ciudad; 
         this.comprador = comprador;
     }
 
@@ -102,42 +122,6 @@ public class RegistroVenta
     }
 
     /**
-     * Devuelve la fecha en que se vendió el mueble
-     * @return fechaVenta Fecha de venta del mueble
-     */
-    public Date getFechaVenta()
-    {
-        return fechaVenta;
-    }
-
-    /**
-     * Modifica la fecha en que se vendió el mueble
-     * @param fechaVenta Nueva fecha de venta
-     */
-    public void setFechaVenta(Date fechaVenta)
-    {
-        this.fechaVenta = fechaVenta;
-    }
-
-    /**
-     * Devuelve el mueble adquirido
-     * @return producto Mueble adquirido
-     */
-    public Mueble getProducto()
-    {
-        return producto;
-    }
-
-    /**
-     * Modifica el mueble adquirido
-     * @param producto Nuevo mueble
-     */
-    public void setProducto(Mueble producto)
-    {
-        this.producto = producto;
-    }
-
-    /**
      * Devuelve la ciudad en dónde se realizó la venta
      * @return ciudad Ciudad
      */
@@ -155,22 +139,30 @@ public class RegistroVenta
         this.ciudad = ciudad;
     }
 
-    /**
-     * Devuelve el usuario que realizó la compra
-     * @return comprador Usuario que realizó la compra
-     */
-    public Usuario getComprador()
-    {
+    public Date getFechaVenta() {
+        return fechaVenta;
+    }
+
+    public void setFechaVenta(Date fechaVenta) {
+        this.fechaVenta = fechaVenta;
+    }
+
+    public Mueble getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Mueble producto) {
+        this.producto = producto;
+    }
+
+    public Usuario getComprador() {
         return comprador;
     }
 
-    /**
-     * Modifica el usuario que realizó la compra
-     * @param comprador Nuevo usuario
-     */
-    public void setComprador(Usuario comprador)
-    {
+    public void setComprador(Usuario comprador) {
         this.comprador = comprador;
     }
+
+    
 
 }

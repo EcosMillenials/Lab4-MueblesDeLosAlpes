@@ -12,11 +12,16 @@
 
 package com.losalpes.entities;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Clase que representa la información de un mueble en el sistema
  * 
  */
-public class Mueble
+@Entity
+public class Mueble implements Serializable
 {
 
     //-----------------------------------------------------------
@@ -26,6 +31,7 @@ public class Mueble
     /**
      * Referencia que identifica el modelo del mueble en el sistema.
      */
+    @Id
     private long referencia;
 
     /**
@@ -41,7 +47,7 @@ public class Mueble
     /**
      * Tipo de mueble.
      */
-    private TipoMueble tipo;
+    private String tipo;
 
     /**
      * Precio del mueble
@@ -88,7 +94,7 @@ public class Mueble
         this.referencia = referencia;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.tipo = tipo;
+        this.tipo = tipo.name();
         this.cantidad=cantidad;
         this.imagen=imagen;
         this.precio=precio;
@@ -155,7 +161,7 @@ public class Mueble
      * Devuelve el tipo de mueble
      * @return tipo Tipo de mueble
      */
-    public TipoMueble getTipo()
+    public String getTipo()
     {
         return tipo;
     }
@@ -164,7 +170,7 @@ public class Mueble
      * Modifica el tipo de mueble
      * @param tipo Nuevo tipo de mueble
      */
-    public void setTipo(TipoMueble tipo)
+    public void setTipo(String tipo)
     {
         this.tipo = tipo;
     }

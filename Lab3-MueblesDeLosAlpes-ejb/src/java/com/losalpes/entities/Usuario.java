@@ -13,11 +13,19 @@
 package com.losalpes.entities;
 
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Clase que representa un usuario del sistema
  * 
  */
+@Entity
 public class Usuario
 {
 
@@ -28,6 +36,7 @@ public class Usuario
     /**
      * Nombre del usuario
      */
+    @Id
     private String login;
 
     /**
@@ -68,6 +77,8 @@ public class Usuario
     /**
      * Ciudad de residencia del usuario
      */
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="ciudad")
     private Ciudad ciudad;
 
     /**
@@ -77,8 +88,8 @@ public class Usuario
 
     /**
      * Profesión del usuario
-     */
-    private Profesion profesion;
+     */    
+    private String profesion;
 
     /**
      * Correo electrónico del usuario
@@ -93,7 +104,8 @@ public class Usuario
     /**
      * Devuelve un lista con todos las compras del usuario
      */
-    private ArrayList<RegistroVenta>compras;
+    @OneToMany(mappedBy="comprador")
+    private List<RegistroVenta> compras;
 
     //-----------------------------------------------------------
     // Constructores
@@ -104,6 +116,7 @@ public class Usuario
      */
     public Usuario()
     {
+        compras = new ArrayList<RegistroVenta>();
 
     }
 
@@ -273,7 +286,7 @@ public class Usuario
      * Devuelve la profesión del usuario
      * @return profesion Profesión del usuario
      */
-    public Profesion getProfesion()
+    public String getProfesion()
     {
         return profesion;
     }
@@ -282,7 +295,7 @@ public class Usuario
      * Modifica la profesión del usuario
      * @param profesion Nueva profesión
      */
-    public void setProfesion(Profesion profesion)
+    public void setProfesion(String profesion)
     {
         this.profesion = profesion;
     }
@@ -345,7 +358,7 @@ public class Usuario
      * Devuelve las compras realizadas por un cliente
      * @return compras Lista con las compras realizadas por el cliente
      */
-    public ArrayList<RegistroVenta> getCompras()
+    public List<RegistroVenta> getCompras()
     {
         return compras;
     }
@@ -354,7 +367,7 @@ public class Usuario
      * Modifica las compras realizadas por un cliente
      * @param compras Nueva lista de compras
      */
-    public void setCompras(ArrayList<RegistroVenta> compras)
+    public void setCompras(List<RegistroVenta> compras)
     {
         this.compras = compras;
     }

@@ -99,6 +99,8 @@ public class RegistroBean implements Serializable
         ciudades = new ArrayList<Ciudad>();   
         mostrarVentana=false;
         usuario = new Usuario();
+        
+        
 
         ArrayList<Ciudad> array = new ArrayList<Ciudad>();
         array.add(new Ciudad("Bogotá"));
@@ -321,6 +323,7 @@ public class RegistroBean implements Serializable
             {
                 usuario.setTipoUsuario(TipoUsuario.Cliente);
             }
+            
             usuarioServices.registrar(usuario);          
             mensaje = "Su cuenta ha sido creada exitosamente.";
             mostrarVentana = true;

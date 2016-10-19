@@ -12,10 +12,17 @@
 
 package com.losalpes.entities;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * Clase que representa una ciudad en el sistema
  * 
  */
+@Entity
 public class Ciudad
 {
       
@@ -26,7 +33,16 @@ public class Ciudad
     /**
      * Nombre de la ciudad
      */
+    @Id
     private String nombre;
+    
+    /**
+     * pais al que pertenece la ciudad
+     */
+    @ManyToOne(cascade = CascadeType.PERSIST)    
+    @JoinColumn(name="pais")
+    private Pais pais;
+
 
     /**
      * Devuelve el nombre de la ciudad
@@ -66,6 +82,14 @@ public class Ciudad
      * Modifica el nombre de la ciudad
      * @param nombre Nuevo nombre de la ciudad
      */
+    
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }
     public void setNombre(String nombre)
     {
         this.nombre = nombre;
