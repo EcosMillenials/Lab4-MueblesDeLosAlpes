@@ -90,7 +90,7 @@ public class ServicioPersistencia implements IServicioPersistenciaMockLocal,ISer
     @Override
     public List findAll(Class c)
     {
-        return em.createQuery("select O from " + c.getSimpleName() + " as O").getResultList();
+        return (List)em.createQuery("select O from " + c.getSimpleName() + " as O").getResultList();
     }
 
     /**

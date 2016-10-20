@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!--
+    Document   : menu
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/main-template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:param name="titulo" value="Control de Acceso" />
+    <ui:define name="body">
+
+        <h:outputText id="linkHeader"
+                      value="Administración del sistema" style="color:white"/>
+
+        <div align="right">
+            <h:panelGroup>
+                <h:form>
+                    <h:commandButton  action="#{loginBean.logout}"  style="background: transparent;
+                                      padding-right: 12px" image="./resources/img/pag/logOff.png"
+                                      title="Cerrar sesión"/>
+                </h:form>
+            </h:panelGroup>
+        </div>
+
+        <h:panelGroup style="padding-bottom: 20px">
+            <center>
+                <h:form>
+
+                    <div align="right" style="padding-right: 10px">
+                        <h:commandButton style="background: transparent" image="./resources/img/pag/atras.png" action="reportes.xhtml"/>
+                    </div>
+                    
+
+                    <p:panel id="basic" header="Resultado Muebles mas vendidos" style="margin-bottom:20px" >
+
+                        <p:dataTable var="reporte" value="#{reportesBean.mueblesVendidos}">
+                            
+                            <p:column headerText="Producto" filterBy="#{reporte.producto.nombre}" sortBy="#{reporte.producto.nombre}">
+                                <h:outputText value="#{reporte.producto.nombre}" />
+                            </p:column>
+
+                            <p:column headerText="Cantidad" filterBy="#{reporte.cantidad}" sortBy="#{reporte.cantidad}">
+                                <h:outputText value="#{reporte.cantidad}" />
+                            </p:column>
+
+
+
+                        </p:dataTable>
+
+                    </p:panel>
+
+
+
+                </h:form>
+            </center>
+        </h:panelGroup>
+    </ui:define>
+</ui:composition>

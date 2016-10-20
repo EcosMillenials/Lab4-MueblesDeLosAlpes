@@ -18,6 +18,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -26,6 +27,7 @@ import javax.persistence.TemporalType;
  * 
  */
 @Entity
+@NamedQuery(name="RegistroVenta.historialCompras", query="SELECT t FROM RegistroVenta t WHERE t.comprador.nombreCompleto = :nombre")
 public class RegistroVenta implements Serializable
 {
 

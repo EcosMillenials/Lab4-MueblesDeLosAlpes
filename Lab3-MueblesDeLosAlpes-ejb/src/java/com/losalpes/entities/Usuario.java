@@ -12,6 +12,7 @@
 
 package com.losalpes.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -26,7 +27,7 @@ import javax.persistence.OneToMany;
  * 
  */
 @Entity
-public class Usuario
+public class Usuario implements Serializable
 {
 
     //-----------------------------------------------------------
@@ -396,6 +397,10 @@ public class Usuario
     public void setSeleccion(boolean seleccion)
     {
         this.seleccion = seleccion;
+    }
+    
+    public String toString() {
+        return this.nombreCompleto;
     }
 
 }
